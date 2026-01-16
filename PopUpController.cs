@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+namespace DPS.Common {
 public class PopUpController : MonoBehaviour {
     public float floatingNumberBoxTimer = 0.5f;
     public float floatingNumberSpeed = 2f;
@@ -51,4 +52,5 @@ public class PopUpController : MonoBehaviour {
         this.rectTransform.anchoredPosition = startingPosition;
         this.timerIsRunning = true; 
     }
+}
 }

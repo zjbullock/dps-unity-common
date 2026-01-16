@@ -2,7 +2,8 @@
     "name": "DPSCommon",
     "rootNamespace": "",
     "references": [
-        "Unity.Cinemachine"
+        "Unity.Cinemachine",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

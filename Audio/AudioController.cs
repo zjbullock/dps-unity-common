@@ -34,26 +34,26 @@ public class AudioController : MonoBehaviour
         
     }
 
-    public void PlayAudio(SoundEffectEnums audioLocation) {
+    // public void PlayAudio(SoundEffectEnums audioLocation) {
 
-        // if(easeOut != null) {
-        //     StopCoroutine(easeOut);
-        //     easeOut = null;
-        // }
-        string audioName = audioLocation + "";
-        audioName = GeneralUtilsStatic.EnumStringCleaner(audioName);
-        AudioClip audioClip = Resources.Load(Constants.Audio.SFX + audioName) as AudioClip;
-        foreach(AudioSource audioSource in this.audioSources) {
-            if(audioSource != null && audioSource.clip == null) {
-                audioSource.PlayOneShot(audioClip, baseVolume);
-                return;
-            }
-        }
-        // if(audioSources != null && audioClip != null) {
-        //     Debug.Log("Playing: " + audioLocation);
-        //     audioSources[1].PlayOneShot(audioClip, baseVolume);
-        // }
-    }
+    //     // if(easeOut != null) {
+    //     //     StopCoroutine(easeOut);
+    //     //     easeOut = null;
+    //     // }
+    //     string audioName = audioLocation + "";
+    //     audioName = GeneralUtilsStatic.EnumStringCleaner(audioName);
+    //     AudioClip audioClip = Resources.Load(Constants.Audio.SFX + audioName) as AudioClip;
+    //     foreach(AudioSource audioSource in this.audioSources) {
+    //         if(audioSource != null && audioSource.clip == null) {
+    //             audioSource.PlayOneShot(audioClip, baseVolume);
+    //             return;
+    //         }
+    //     }
+    //     // if(audioSources != null && audioClip != null) {
+    //     //     Debug.Log("Playing: " + audioLocation);
+    //     //     audioSources[1].PlayOneShot(audioClip, baseVolume);
+    //     // }
+    // }
 
     public void PlayAudio(AudioClip audioClip) {
 

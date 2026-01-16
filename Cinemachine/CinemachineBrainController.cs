@@ -7,6 +7,7 @@ using Unity.Cinemachine;
 /**
     Special thanks to Thsbrown @ https://github.com/Breakstep-Studios/toms-cinemachine-tools/tree/master for this excellent tool
 */
+namespace DPS.Common{
 public class CinemachineBrainController : MonoBehaviour
 {
      /// <summary>
@@ -68,4 +69,4 @@ public class CinemachineBrainController : MonoBehaviour
     
 
 }
-
+}

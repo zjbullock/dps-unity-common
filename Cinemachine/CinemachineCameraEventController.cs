@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Cinemachine;
 using System;
 
+namespace DPS.Common{
 public class CinemachineCameraEventController : MonoBehaviour
 {
 
@@ -62,4 +63,5 @@ public class CinemachineCameraEventController : MonoBehaviour
         this.AddCineMachineEvent(this.cinemachineVirtualCamera, callBack);
     }
 
+}
 }

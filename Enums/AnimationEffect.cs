@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public enum AnimationEffect {
-    Casting,
-    Thinking
+namespace DPS.Common
+{
+    public enum AnimationEffect {
+        Casting,
+        Thinking
+    }
+  
 }

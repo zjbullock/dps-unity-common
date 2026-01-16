@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class BillBoardSpriteController : MonoBehaviour
+namespace DPS.Common
+{
+    public class BillBoardSpriteController : MonoBehaviour
 {
 
     [SerializeField]
@@ -99,3 +101,5 @@ public class BillBoardSpriteController : MonoBehaviour
         LateUpdate
     }
 }
+}
+

@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public enum AnimationStates {
-    Default,
-    Ko,
-    PoiseBreak,
-    Defend,
-    Fall,
-    Jump,
+namespace DPS.Common
+{
+    public enum AnimationStates {
+        Default,
+        Ko,
+        PoiseBreak,
+        Defend,
+        Fall,
+        Jump,
+    }   
 }

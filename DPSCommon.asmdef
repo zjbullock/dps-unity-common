@@ -1,3 +1,16 @@
 {
-	"name": "DPSCommon"
+    "name": "DPSCommon",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

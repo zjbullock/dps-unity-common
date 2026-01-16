@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DPS.Common {
 public static class GeneralUtilsStatic
 {
 #nullable enable
@@ -95,4 +96,5 @@ public static class GeneralUtilsStatic
         return (currentvalue - valueToSubtract + (int) Math.Abs(currentvalue - valueToSubtract)) / 2;
     }
     
+}
 }

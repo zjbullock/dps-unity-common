@@ -1,6 +1,6 @@
 {
   "name": "com.dynamicproductivitystudio.common",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "displayName": "DPSCommon",
   "unity": "6000.0",
   "description": "A set of common classes, interfaces, and other tools for the rest of the Dynamic Productivity Studio suite",

@@ -1,4 +1,7 @@
+#if UNITY_EDITOR
 using UnityEditor;
+// Your editor class or code here
+#endif
 using UnityEngine;
 namespace DPS.Common {
 /// <summary>

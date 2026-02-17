@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace DPS.Common {
 public static class GeneralUtilsStatic
@@ -96,5 +100,114 @@ public static class GeneralUtilsStatic
         return (currentvalue - valueToSubtract + (int) Math.Abs(currentvalue - valueToSubtract)) / 2;
     }
     
+    #nullable enable
+    public static async Task<IList<T>> GetObjectListByAssetReferences<T>(List<AssetReference> assetReferences) where T: UnityEngine.Object
+        {
+            if (assetReferences.Count == 0)
+            {
+                return new List<T>();
+            }
+
+            Debug.Log($"Asset References Count: {assetReferences.Count}");
+            AsyncOperationHandle<IList<T>> handle = Addressables.LoadAssetsAsync<T>(assetReferences, null, Addressables.MergeMode.Union);
+
+            try {
+                await handle.Task;
+                // Execution resumes here once the operation is completed
+                if (handle.Status == AsyncOperationStatus.Failed)
+                {
+                    Debug.LogError($"Failed to load scriptable objects: {assetReferences}");
+                    return new List<T>();
+                }
+                
+                return handle.Result; // Access the result
+
+            } catch (Exception e)    {
+                Debug.LogError($"Error loading: {e}");
+            } finally   {
+                handle.Release();
+            }
+            return new List<T>();     
+        }
+
+    public static async Task<GenericDictionary<string, T>> GetObjectDictionaryByAssetReferences<T>(List<AssetReferenceT<T>> assetReferences) where T: UnityEngine.Object
+        {
+            if (assetReferences.Count == 0)
+            {
+                return new GenericDictionary<string, T>();
+            }
+
+            GenericDictionary<string, T> loadedRefs = new();
+            GenericDictionary<string, AsyncOperationHandle<T>> handles = new();
+            List<Task> tasks = new();
+            foreach(AssetReferenceT<T> assetRef in assetReferences)
+            {
+                try {
+                    if (assetRef == null || !assetRef.RuntimeKeyIsValid())
+                    {
+                        continue;
+                    }
+                    if(handles.ContainsKey(assetRef.AssetGUID))
+                    {
+                        continue;
+                    }
+                    AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(assetRef);
+
+                    handles.Add(assetRef.AssetGUID, handle);
+                    tasks.Add(handle.Task);
+                    
+                } catch (Exception e)    {
+                    Debug.LogError($"Error loading: {e}");
+                }
+            }
+
+            await Task.WhenAll(tasks);
+            foreach(var assetHandle in handles)
+            {
+                if (assetHandle.Value.Status == AsyncOperationStatus.Failed)
+                {
+                    Addressables.Release(assetHandle.Value);
+                    continue;
+                }
+                if (!loadedRefs.ContainsKey(assetHandle.Key))
+                {
+                    loadedRefs.Add(new(assetHandle.Key, assetHandle.Value.Result));
+                }
+                Addressables.Release(assetHandle.Value);
+            }
+
+
+            return loadedRefs;
+        }
+
+        public static async Task<T?> GetObjectByAssetReference<T>(AssetReference assetReference) where T: UnityEngine.Object
+    {
+        if (assetReference == null || !assetReference.RuntimeKeyIsValid())
+        {
+            return null;
+        }
+
+        AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(assetReference);
+
+        try {
+            await handle.Task;
+            // Execution resumes here once the operation is completed
+            if (handle.Status == AsyncOperationStatus.Failed)
+            {
+                Debug.LogError($"Failed to load scriptable objects: {assetReference.AssetGUID}");
+                return null;
+            }
+            
+            return handle.Result; // Access the result
+
+        } catch (Exception e)    {
+            Debug.LogError($"Error loading: {e}");
+        } finally   {
+            handle.Release();
+        }
+        return null;     
+    }
+    #nullable disable
+
 }
 }
